@@ -158,27 +158,14 @@
   <script>
     // enable animations (remove no-js class)
     document.documentElement.classList.remove('no-js');
-
-    /* Reveal animation */
-    const reveal = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('revealed');reveal.unobserve(e.target);}});
-    },{threshold:0.08});
-    document.querySelectorAll('.card').forEach(c=>reveal.observe(c));
-
-    /* Back to top */
-    const toTop=document.getElementById('toTop');
-    window.addEventListener('scroll',()=>{toTop.style.display=window.scrollY>400?'grid':'none';});
-    toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
-
+  
     /* Projects data */
-    const projects=[
+    const projects = [
       {
-        title: "Activity 1 — Jupyter Notebook",
-        desc: "Intro activity notebook for CSST102.",
+        title: "Activity 1 — PDF",
+        desc: "Intro activity notebook exported as PDF.",
         tags: ["CSST102"],
-        href: "https://nbviewer.org/github/mendezjerick/CSST102-3A-AY25-26/blob/main/projects/Activity%201.ipynb"
-        // In future, add HTML exports instead for nicer viewing:
-        // href: "./projects/activity-1.html"
+        href: "./projects/activity1.pdf"   // ← points to your PDF on GitHub Pages
       }
       // --- Add more links here as you grow ---
     ];
