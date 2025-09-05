@@ -209,48 +209,47 @@
   <div id="toast" class="toast">Filter applied</div>
 
   <script>
-    /* Reveal animation */
-    const reveal = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){ e.target.classList.add('revealed'); reveal.unobserve(e.target); }
-      })
-    },{threshold:0.08});
-    document.querySelectorAll('.card').forEach(c=>reveal.observe(c));
+  const grid = document.getElementById('projectGrid');
+  const emptyMsg = document.getElementById('emptyMsg');
 
-    /* Back to top */
-    const toTop=document.getElementById('toTop');
-    window.addEventListener('scroll',()=>{toTop.style.display=window.scrollY>400?'grid':'none';});
-    toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
-
-    /* Projects data (keep empty now; add later) */
-    const projects=[]; 
-    const grid=document.getElementById('projectGrid');
-    const emptyMsg=document.getElementById('emptyMsg');
-    function render(filter='all'){
-      grid.innerHTML='';
-      const items=projects.filter(p=>filter==='all'||(p.tags||[]).includes(filter));
-      if(items.length===0){ emptyMsg.style.display='block'; return; }
-      emptyMsg.style.display='none';
-      for(const p of items){
-        const a=document.createElement('a');
-        a.className='tile'; a.href=p.href; a.target='_blank'; a.rel='noopener';
-        a.innerHTML=`<h3>${p.title}</h3><p class="muted">${p.desc||''}</p>`;
-        grid.appendChild(a);
-      }
+  async function loadProjects(filter='all'){
+    try{
+      const res = await fetch('./projects/manifest.json', {cache:'no-store'});
+      const items = await res.json();
+      render(items, filter);
+    }catch(e){
+      console.error(e);
+      render([], filter);
     }
-    render();
+  }
 
-    /* Filter chips + toast */
-    const chips=document.querySelectorAll('.chip');
-    const toast=document.getElementById('toast');
-    chips.forEach(ch=>{
-      ch.addEventListener('click',()=>{
-        chips.forEach(x=>x.classList.remove('active')); ch.classList.add('active');
-        const f=ch.dataset.filter; render(f);
-        toast.textContent=(f==='all'?'Showing all projects':`Showing ${f}`);
-        toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),1200);
-      });
+  function render(items, filter){
+    grid.innerHTML='';
+    const list = items.filter(p => filter==='all' || (p.tags||[]).includes(filter));
+    if(list.length===0){ emptyMsg.style.display='block'; return; }
+    emptyMsg.style.display='none';
+    for(const p of list){
+      const a = document.createElement('a');
+      a.className='tile'; a.href=p.href; a.target='_blank'; a.rel='noopener';
+      a.innerHTML = `<h3>${p.title}</h3><p class="muted">${p.desc||''}</p>`;
+      grid.appendChild(a);
+    }
+  }
+
+  // existing chip logic stays the same, just call loadProjects instead of render
+  const chips = document.querySelectorAll('.chip');
+  const toast = document.getElementById('toast');
+  chips.forEach(ch=>{
+    ch.addEventListener('click',()=>{
+      chips.forEach(x=>x.classList.remove('active')); ch.classList.add('active');
+      const f=ch.dataset.filter;
+      loadProjects(f);
+      toast.textContent=(f==='all'?'Showing all projects':`Showing ${f}`);
+      toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),1200);
     });
-  </script>
+  });
+
+  loadProjects(); // initial load
+</script>
 </body>
 </html>
