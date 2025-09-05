@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -84,6 +84,9 @@
       background:linear-gradient(180deg,var(--leaf),var(--leaf-dark));color:#fff;cursor:pointer;
       box-shadow:0 10px 18px rgba(88,183,127,.28);display:none;place-items:center;font-size:20px}
     footer{color:var(--sprig);text-align:center;padding:30px 0 46px}
+
+    /* no-JS fallback: show cards even if script fails */
+    .no-js .card { opacity:1; transform:none; }
   </style>
 </head>
 <body>
@@ -153,6 +156,9 @@
   <div id="toast" class="toast">Filter applied</div>
 
   <script>
+    // enable animations (remove no-js class)
+    document.documentElement.classList.remove('no-js');
+
     /* Reveal animation */
     const reveal = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('revealed');reveal.unobserve(e.target);}});
@@ -179,6 +185,7 @@
 
     const grid=document.getElementById('projectGrid');
     const emptyMsg=document.getElementById('emptyMsg');
+
     function render(filter='all'){
       grid.innerHTML='';
       const items=projects.filter(p=>filter==='all'||(p.tags||[]).includes(filter));
