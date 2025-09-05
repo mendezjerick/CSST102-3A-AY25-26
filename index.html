@@ -158,14 +158,30 @@
   <script>
     // enable animations (remove no-js class)
     document.documentElement.classList.remove('no-js');
-  
+
+    /* Reveal animation */
+    const reveal = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('revealed');
+          reveal.unobserve(e.target);
+        }
+      });
+    },{threshold:0.08});
+    document.querySelectorAll('.card').forEach(c=>reveal.observe(c));
+
+    /* Back to top */
+    const toTop=document.getElementById('toTop');
+    window.addEventListener('scroll',()=>{toTop.style.display=window.scrollY>400?'grid':'none';});
+    toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
     /* Projects data */
     const projects = [
       {
         title: "Activity 1 — PDF",
         desc: "Intro activity notebook exported as PDF.",
         tags: ["CSST102"],
-        href: "./projects/activity1.pdf"   // ← points to your PDF on GitHub Pages
+        href: "./projects/activity1.pdf"
       }
       // --- Add more links here as you grow ---
     ];
