@@ -8,141 +8,93 @@
   <style>
     /* --- Light Spring Palette (greens) --- */
     :root{
-      --paper:#f7fbf7;         /* near-white */
-      --mist:#eef8f0;          /* soft mint background */
-      --mint:#dff3e3;          /* light mint panel */
-      --leaf:#91d0a0;          /* fresh leaf green (accent) */
-      --leaf-dark:#58b77f;     /* darker accent for buttons */
-      --pine:#254f3e;          /* deep pine for strong text */
-      --sprig:#8aa78f;         /* muted text */
+      --paper:#f7fbf7; --mist:#eef8f0; --mint:#dff3e3;
+      --leaf:#91d0a0; --leaf-dark:#58b77f; --pine:#254f3e; --sprig:#8aa78f;
       --ring: rgba(88,183,127,.35);
       --shadow:0 12px 28px rgba(22,60,48,.14);
       --radius:18px; --max:1080px;
     }
-
     *{box-sizing:border-box}
     html,body{margin:0;height:100%}
     body{
-      font:16px/1.65 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font:16px/1.65 ui-sans-serif, system-ui, Segoe UI, Roboto, Arial;
       color:var(--pine);
       background:
         radial-gradient(1200px 600px at 10% -10%, var(--mint) 0, transparent 55%),
         radial-gradient(1000px 500px at 120% 0%, var(--mist) 0, transparent 55%),
         linear-gradient(180deg, var(--mist), var(--paper));
-      background-attachment: fixed;
-      scroll-behavior:smooth;
+      background-attachment: fixed; scroll-behavior:smooth;
     }
     a{color:var(--leaf-dark);text-decoration:none}
     a:hover{text-decoration:underline}
     .wrap{max-width:var(--max);margin:0 auto;padding:20px}
 
-    /* Animated hero */
-    header{
-      position:relative; overflow:hidden;
-      padding:64px 26px 72px; border-radius: calc(var(--radius) + 8px);
-      outline:1px solid rgba(37,79,62,.12); box-shadow:var(--shadow);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.8), rgba(255,255,255,.5)),
+    header{position:relative;overflow:hidden;padding:64px 26px 72px;
+      border-radius: calc(var(--radius) + 8px);
+      outline:1px solid rgba(37,79,62,.12);box-shadow:var(--shadow);
+      background:linear-gradient(180deg, rgba(255,255,255,.8), rgba(255,255,255,.5)),
         linear-gradient(180deg, #fff, var(--mist));
       --blob1:#e9faf0; --blob2:#d6f3e1; --blob3:#e3f7ea;
     }
-    .blob{position:absolute; border-radius:50%; filter:blur(26px); opacity:.55;
+    .blob{position:absolute;border-radius:50%;filter:blur(26px);opacity:.55;
       animation: float 18s ease-in-out infinite;}
-    .b1{width:360px;height:360px; background:var(--blob1); top:-120px; left:-80px;}
-    .b2{width:300px;height:300px; background:var(--blob2); top:-80px; right:-60px; animation-duration:22s}
-    .b3{width:260px;height:260px; background:var(--blob3); bottom:-120px; left:20%; animation-duration:26s}
-    @keyframes float{ 0%,100%{transform:translateY(0) translateX(0) scale(1)}
-      50%{transform:translateY(18px) translateX(8px) scale(1.03)} }
+    .b1{width:360px;height:360px;background:var(--blob1);top:-120px;left:-80px;}
+    .b2{width:300px;height:300px;background:var(--blob2);top:-80px;right:-60px;animation-duration:22s}
+    .b3{width:260px;height:260px;background:var(--blob3);bottom:-120px;left:20%;animation-duration:26s}
+    @keyframes float{0%,100%{transform:translateY(0) translateX(0) scale(1)}
+      50%{transform:translateY(18px) translateX(8px) scale(1.03)}}
 
-    h1{margin:0 0 6px; font-size: clamp(28px, 4.4vw, 46px); position:relative}
-    .sub{margin:8px 0 14px; color:var(--sprig); position:relative}
-    .badge{
-      position:relative;
-      display:inline-block; padding:6px 10px; border-radius:999px; font-weight:600;
-      background:#f1fbf4; border:1px solid rgba(88,183,127,.35); color:#4f7c67;
-    }
-    .nav{display:flex; gap:16px; margin-top:14px; flex-wrap:wrap; position:relative}
-    .nav a{font-weight:600; color:#4f7c67}
+    h1{margin:0 0 6px;font-size:clamp(28px,4.4vw,46px)}
+    .sub{margin:8px 0 14px;color:var(--sprig)}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;font-weight:600;
+      background:#f1fbf4;border:1px solid rgba(88,183,127,.35);color:#4f7c67;}
+    .nav{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap}
+    .nav a{font-weight:600;color:#4f7c67}
     .nav a:hover{color:var(--pine)}
 
-    .cta{
-      position:relative;
-      display:inline-block; margin-top:16px; padding:12px 18px; font-weight:700;
-      color:#ffffff; border-radius:14px; border:0;
-      background:linear-gradient(180deg,var(--leaf),var(--leaf-dark));
-      box-shadow:0 10px 18px rgba(88,183,127,.28);
-      transition:transform .06s ease;
-    }
+    .cta{display:inline-block;margin-top:16px;padding:12px 18px;font-weight:700;
+      color:#fff;border-radius:14px;background:linear-gradient(180deg,var(--leaf),var(--leaf-dark));
+      box-shadow:0 10px 18px rgba(88,183,127,.28);transition:transform .06s ease;}
     .cta:hover{transform:translateY(-1px)}
 
-    /* Section cards */
     section{margin-top:28px}
-    .card{
-      background: linear-gradient(180deg, #ffffff, var(--mint));
-      border-radius: var(--radius);
-      padding: 22px;
-      outline:1px solid rgba(37,79,62,.12);
-      box-shadow:var(--shadow);
-      opacity:0; transform: translateY(12px);
-      transition: opacity .6s ease, transform .6s ease;
-    }
-    .card.revealed{opacity:1; transform:none}
-    h2{margin:0 0 12px; font-size: clamp(20px, 3.2vw, 28px)}
+    .card{background:linear-gradient(180deg,#fff,var(--mint));border-radius:var(--radius);padding:22px;
+      outline:1px solid rgba(37,79,62,.12);box-shadow:var(--shadow);
+      opacity:0;transform:translateY(12px);transition:.6s}
+    .card.revealed{opacity:1;transform:none}
+    h2{margin:0 0 12px;font-size:clamp(20px,3.2vw,28px)}
     .muted{color:var(--sprig)}
 
-    /* Grid & tiles */
-    .grid{display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr))}
-    .tile{
-      background: linear-gradient(180deg, #ffffff, #eef7f0);
-      border-radius:14px; padding:16px;
-      outline:1px solid rgba(37,79,62,.12);
-      transition:transform .08s ease, outline-color .2s ease, box-shadow .2s ease;
-    }
-    .tile:hover{transform:translateY(-2px); outline-color:var(--ring); box-shadow:0 10px 22px rgba(22,60,48,.10)}
+    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .tile{background:linear-gradient(180deg,#fff,#eef7f0);border-radius:14px;padding:16px;
+      outline:1px solid rgba(37,79,62,.12);transition:.2s}
+    .tile:hover{transform:translateY(-2px);outline-color:var(--ring);box-shadow:0 10px 22px rgba(22,60,48,.10)}
 
-    /* Filter chips */
-    .chips{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px}
-    .chip{
-      padding:6px 10px; border-radius:999px; border:1px solid rgba(37,79,62,.22);
-      background:#f4fbf6; color:#4f7c67; font-weight:600; cursor:pointer;
-      transition:transform .06s ease, background .2s ease, border-color .2s ease;
-      user-select:none;
-    }
-    .chip:hover{transform:translateY(-1px)}
-    .chip.active{background:linear-gradient(180deg,var(--leaf),var(--leaf-dark)); color:#fff; border-color:transparent}
+    .chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+    .chip{padding:6px 10px;border-radius:999px;border:1px solid rgba(37,79,62,.22);
+      background:#f4fbf6;color:#4f7c67;font-weight:600;cursor:pointer;transition:.2s}
+    .chip.active{background:linear-gradient(180deg,var(--leaf),var(--leaf-dark));color:#fff}
 
-    /* Toast */
-    .toast{
-      position:fixed; left:50%; bottom:24px; transform:translateX(-50%) translateY(20px);
-      background:var(--pine); color:#fff; padding:10px 14px; border-radius:999px;
-      box-shadow:0 14px 30px rgba(0,0,0,.25); opacity:0; pointer-events:none;
-      transition:opacity .25s ease, transform .25s ease; z-index:10;
-    }
-    .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+    .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);
+      background:var(--pine);color:#fff;padding:10px 14px;border-radius:999px;
+      box-shadow:0 14px 30px rgba(0,0,0,.25);opacity:0;transition:.25s;z-index:10}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-    /* Back to top */
-    #toTop{
-      position:fixed; right:18px; bottom:18px; border:0; border-radius:50%; width:44px; height:44px;
-      background:linear-gradient(180deg,var(--leaf),var(--leaf-dark)); color:#fff; cursor:pointer;
-      box-shadow:0 10px 18px rgba(88,183,127,.28); display:none; place-items:center; font-size:20px;
-    }
-
-    footer{color:var(--sprig); text-align:center; padding:30px 0 46px}
+    #toTop{position:fixed;right:18px;bottom:18px;border:0;border-radius:50%;width:44px;height:44px;
+      background:linear-gradient(180deg,var(--leaf),var(--leaf-dark));color:#fff;cursor:pointer;
+      box-shadow:0 10px 18px rgba(88,183,127,.28);display:none;place-items:center;font-size:20px}
+    footer{color:var(--sprig);text-align:center;padding:30px 0 46px}
   </style>
 </head>
 <body>
   <div class="wrap">
 
     <!-- HERO -->
-    <header aria-label="Light spring header">
-      <div class="blob b1"></div>
-      <div class="blob b2"></div>
-      <div class="blob b3"></div>
-
+    <header>
+      <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
       <span class="badge">🌿 Light Spring • CSST102</span>
       <h1>Hi, I’m <strong>Jerick Mendez</strong></h1>
       <p class="sub">BS Computer Science • Section 3A • AY 2025–2026</p>
-
       <div class="nav">
         <a href="#repo">Repository</a>
         <a href="#projects">Projects</a>
@@ -150,7 +102,6 @@
         <a href="#contact">Contact</a>
         <a href="https://github.com/mendezjerick" target="_blank" rel="noopener">GitHub ↗</a>
       </div>
-
       <a class="cta" href="#repo">View CSST102 work</a>
     </header>
 
@@ -173,21 +124,17 @@
         <button class="chip" data-filter="CSST102">CSST102</button>
       </div>
       <div id="projectGrid" class="grid"></div>
-      <p id="emptyMsg" class="muted" style="display:none">
-        It’s empty for now. Add files in <code>projects/</code> later.
-      </p>
+      <p id="emptyMsg" class="muted" style="display:none">It’s empty for now.</p>
       <p class="muted" style="margin-top:10px">
-        Folder link: <a href="projects/">open <strong>projects/</strong></a>
+        Folder link: <a href="./projects/">open <strong>projects/</strong></a>
       </p>
     </section>
 
     <!-- ABOUT -->
     <section id="about" class="card">
       <h2>About Me</h2>
-      <p>
-        I’m a BSCS student who enjoys building small, clean projects and learning core CS skills.
-        Current focus: data structures, Java/Python, and front-end basics (HTML/CSS/JS).
-      </p>
+      <p>I’m a BSCS student who enjoys building small, clean projects and learning core CS skills.
+      Current focus: data structures, Java/Python, and front-end basics (HTML/CSS/JS).</p>
     </section>
 
     <!-- CONTACT -->
@@ -202,54 +149,61 @@
     <footer>© 2025 Jerick Mendez • Light Spring</footer>
   </div>
 
-  <!-- Back to top -->
   <button id="toTop" aria-label="Back to top">↑</button>
-
-  <!-- Toast -->
   <div id="toast" class="toast">Filter applied</div>
 
   <script>
-  const grid = document.getElementById('projectGrid');
-  const emptyMsg = document.getElementById('emptyMsg');
+    /* Reveal animation */
+    const reveal = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('revealed');reveal.unobserve(e.target);}});
+    },{threshold:0.08});
+    document.querySelectorAll('.card').forEach(c=>reveal.observe(c));
 
-  async function loadProjects(filter='all'){
-    try{
-      const res = await fetch('./projects/manifest.json', {cache:'no-store'});
-      const items = await res.json();
-      render(items, filter);
-    }catch(e){
-      console.error(e);
-      render([], filter);
+    /* Back to top */
+    const toTop=document.getElementById('toTop');
+    window.addEventListener('scroll',()=>{toTop.style.display=window.scrollY>400?'grid':'none';});
+    toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+    /* Projects data */
+    const projects=[
+      {
+        title: "Activity 1 — Jupyter Notebook",
+        desc: "Intro activity notebook for CSST102.",
+        tags: ["CSST102"],
+        href: "./projects/Activity%201.ipynb"
+        // In future, add HTML exports instead for nicer viewing:
+        // href: "./projects/activity-1.html"
+      }
+      // --- Add more links here as you grow ---
+    ];
+
+    const grid=document.getElementById('projectGrid');
+    const emptyMsg=document.getElementById('emptyMsg');
+    function render(filter='all'){
+      grid.innerHTML='';
+      const items=projects.filter(p=>filter==='all'||(p.tags||[]).includes(filter));
+      if(items.length===0){emptyMsg.style.display='block';return;}
+      emptyMsg.style.display='none';
+      for(const p of items){
+        const a=document.createElement('a');
+        a.className='tile'; a.href=p.href; a.target='_blank'; a.rel='noopener';
+        a.innerHTML=`<h3>${p.title}</h3><p class="muted">${p.desc||''}</p>`;
+        grid.appendChild(a);
+      }
     }
-  }
+    render();
 
-  function render(items, filter){
-    grid.innerHTML='';
-    const list = items.filter(p => filter==='all' || (p.tags||[]).includes(filter));
-    if(list.length===0){ emptyMsg.style.display='block'; return; }
-    emptyMsg.style.display='none';
-    for(const p of list){
-      const a = document.createElement('a');
-      a.className='tile'; a.href=p.href; a.target='_blank'; a.rel='noopener';
-      a.innerHTML = `<h3>${p.title}</h3><p class="muted">${p.desc||''}</p>`;
-      grid.appendChild(a);
-    }
-  }
-
-  // existing chip logic stays the same, just call loadProjects instead of render
-  const chips = document.querySelectorAll('.chip');
-  const toast = document.getElementById('toast');
-  chips.forEach(ch=>{
-    ch.addEventListener('click',()=>{
-      chips.forEach(x=>x.classList.remove('active')); ch.classList.add('active');
-      const f=ch.dataset.filter;
-      loadProjects(f);
-      toast.textContent=(f==='all'?'Showing all projects':`Showing ${f}`);
-      toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),1200);
+    /* Filter chips + toast */
+    const chips=document.querySelectorAll('.chip');
+    const toast=document.getElementById('toast');
+    chips.forEach(ch=>{
+      ch.addEventListener('click',()=>{
+        chips.forEach(x=>x.classList.remove('active')); ch.classList.add('active');
+        const f=ch.dataset.filter; render(f);
+        toast.textContent=(f==='all'?'Showing all projects':`Showing ${f}`);
+        toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),1200);
+      });
     });
-  });
-
-  loadProjects(); // initial load
-</script>
+  </script>
 </body>
 </html>
