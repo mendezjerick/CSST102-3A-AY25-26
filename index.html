@@ -6,11 +6,11 @@
   <title>Jerick Mendez • CSST102 Spring Portfolio</title>
   <meta name="description" content="Course portfolio site with a light spring theme for CSST102." />
   <style>
-    /* --- Light Spring Palette (greens) --- */
     :root{
       --paper:#f7fbf7; --mist:#eef8f0; --mint:#dff3e3;
-      --leaf:#91d0a0; --leaf-dark:#58b77f; --pine:#254f3e; --sprig:#8aa78f;
-      --ring: rgba(88,183,127,.35);
+      --leaf:#91d0a0; --leaf-dark:#58b77f;
+      --pine:#254f3e; --sprig:#8aa78f;
+      --ring:rgba(88,183,127,.35);
       --shadow:0 12px 28px rgba(22,60,48,.14);
       --radius:18px; --max:1080px;
     }
@@ -23,38 +23,72 @@
         radial-gradient(1200px 600px at 10% -10%, var(--mint) 0, transparent 55%),
         radial-gradient(1000px 500px at 120% 0%, var(--mist) 0, transparent 55%),
         linear-gradient(180deg, var(--mist), var(--paper));
-      background-attachment: fixed; scroll-behavior:smooth;
+      background-attachment:fixed;
+      scroll-behavior:smooth;
     }
     a{color:var(--leaf-dark);text-decoration:none}
     a:hover{text-decoration:underline}
     .wrap{max-width:var(--max);margin:0 auto;padding:20px}
 
-    header{position:relative;overflow:hidden;padding:64px 26px 72px;
-      border-radius: calc(var(--radius) + 8px);
-      outline:1px solid rgba(37,79,62,.12);box-shadow:var(--shadow);
-      background:linear-gradient(180deg, rgba(255,255,255,.8), rgba(255,255,255,.5)),
-        linear-gradient(180deg, #fff, var(--mist));
-      --blob1:#e9faf0; --blob2:#d6f3e1; --blob3:#e3f7ea;
+    header{
+      position:relative;overflow:hidden;padding:32px 26px 32px;
+      border-radius:calc(var(--radius) + 8px);
+      outline:1px solid rgba(37,79,62,.12);
+      box-shadow:var(--shadow);
+      background:
+        radial-gradient(400px 300px at 85% 40%, rgba(180,255,210,.4) 0%, rgba(180,255,210,0) 70%),
+        radial-gradient(500px 400px at 15% 80%, rgba(170,240,200,.25) 0%, rgba(170,240,200,0) 70%),
+        linear-gradient(180deg,#fff,rgba(255,255,255,.6));
     }
-    .blob{position:absolute;border-radius:50%;filter:blur(26px);opacity:.55;
-      animation: float 18s ease-in-out infinite;}
-    .b1{width:360px;height:360px;background:var(--blob1);top:-120px;left:-80px;}
-    .b2{width:300px;height:300px;background:var(--blob2);top:-80px;right:-60px;animation-duration:22s}
-    .b3{width:260px;height:260px;background:var(--blob3);bottom:-120px;left:20%;animation-duration:26s}
-    @keyframes float{0%,100%{transform:translateY(0) translateX(0) scale(1)}
-      50%{transform:translateY(18px) translateX(8px) scale(1.03)}}
+    .badge{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      font-weight:600;
+      background:#f1fbf4;
+      border:1px solid rgba(88,183,127,.35);
+      color:#4f7c67;
+      font-size:.9rem;
+      line-height:1.2;
+      margin-bottom:20px;
+    }
+    h1{
+      margin:0 0 12px;
+      font-size:clamp(28px,4.4vw,42px);
+      font-weight:700;
+      color:var(--pine);
+    }
+    .sub{
+      margin:0 0 20px;
+      color:var(--sprig);
+      font-size:.95rem;
+      line-height:1.4;
+    }
+    .nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+      font-size:.95rem;
+      font-weight:600;
+      color:#4f7c67;
+      margin:0 0 24px;
+      padding:0;
+      list-style:none;
+    }
+    .nav a{color:#4f7c67;text-decoration:none}
+    .nav a:hover{color:var(--pine);text-decoration:none}
 
-    h1{margin:0 0 6px;font-size:clamp(28px,4.4vw,46px)}
-    .sub{margin:8px 0 14px;color:var(--sprig)}
-    .badge{display:inline-block;padding:6px 10px;border-radius:999px;font-weight:600;
-      background:#f1fbf4;border:1px solid rgba(88,183,127,.35);color:#4f7c67;}
-    .nav{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap}
-    .nav a{font-weight:600;color:#4f7c67}
-    .nav a:hover{color:var(--pine)}
-
-    .cta{display:inline-block;margin-top:16px;padding:12px 18px;font-weight:700;
-      color:#fff;border-radius:14px;background:linear-gradient(180deg,var(--leaf),var(--leaf-dark));
-      box-shadow:0 10px 18px rgba(88,183,127,.28);transition:transform .06s ease;}
+    .cta{
+      display:inline-block;
+      padding:12px 18px;
+      font-weight:700;
+      color:#fff;
+      border-radius:14px;
+      background:linear-gradient(180deg,var(--leaf),var(--leaf-dark));
+      box-shadow:0 10px 18px rgba(88,183,127,.28);
+      transition:transform .06s ease;
+      font-size:.95rem;
+    }
     .cta:hover{transform:translateY(-1px)}
 
     section{margin-top:28px}
@@ -64,23 +98,72 @@
       padding:22px;
       outline:1px solid rgba(37,79,62,.12);
       box-shadow:var(--shadow);
-      opacity:0;
-      transform:translateY(12px);
+      opacity:1;
+      transform:none;
       transition:.6s;
     }
-    .card.revealed{opacity:1;transform:none}
-    h2{margin:0 0 12px;font-size:clamp(20px,3.2vw,28px)}
-    .muted{color:var(--sprig)}
+    h2{
+      margin:0 0 12px;
+      font-size:clamp(20px,3.2vw,28px);
+      font-weight:600;
+      color:var(--pine);
+    }
+    .muted{color:var(--sprig);font-size:.95rem;line-height:1.4}
 
-    /* folder grid */
+    .grid{
+      display:grid;
+      gap:16px;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    }
+    .tile{
+      background:linear-gradient(180deg,#fff,#eef7f0);
+      border-radius:14px;
+      padding:16px;
+      outline:1px solid rgba(37,79,62,.12);
+      transition:.2s;
+      box-shadow:0 10px 22px rgba(22,60,48,.06);
+    }
+    .tile:hover{
+      transform:translateY(-2px);
+      outline-color:var(--ring);
+      box-shadow:0 10px 22px rgba(22,60,48,.10);
+    }
+    .tile h3{
+      margin:0 0 6px;
+      font-size:1rem;
+      font-weight:600;
+      color:var(--pine);
+    }
+
+    .chips{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .chip{
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(37,79,62,.22);
+      background:#f4fbf6;
+      color:#4f7c67;
+      font-weight:600;
+      cursor:pointer;
+      font-size:.85rem;
+      line-height:1.2;
+      transition:.2s;
+    }
+    .chip.active{
+      background:linear-gradient(180deg,var(--leaf),var(--leaf-dark));
+      color:#fff;
+    }
+
     .folder-grid{
       display:grid;
       gap:20px;
       grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));
       margin-top:20px;
     }
-
-    /* SPRING VERSION OF FOLDER CARD (light, mint, soft shadow) */
     .folder-card{
       position:relative;
       background:
@@ -91,7 +174,7 @@
       min-height:220px;
       color:var(--pine);
       box-shadow:0 24px 40px rgba(22,60,48,.12);
-      border:1px solid rgba(37,79,62,.06);
+      border:1px solid rgba(37,79,62,.08);
       outline:1px solid rgba(88,183,127,.28);
       display:flex;
       flex-direction:column;
@@ -99,21 +182,17 @@
       text-align:center;
       transition:.18s;
     }
-
     .folder-card:hover{
       transform:translateY(-2px) scale(1.01);
       box-shadow:0 28px 48px rgba(22,60,48,.18);
       outline-color:var(--ring);
     }
-
-    /* icon square */
     .folder-icon-wrap{
       position:absolute;
       top:28px;
       left:50%;
       transform:translateX(-50%);
-      width:96px;
-      height:96px;
+      width:96px;height:96px;
       border-radius:16px;
       background:
         radial-gradient(circle at 50% 30%, rgba(255,255,255,.6) 0%, rgba(255,255,255,0) 70%),
@@ -129,29 +208,18 @@
       line-height:1;
       color:#4a1742;
     }
-
     .accent-blue{
-      background:
-        radial-gradient(circle at 50% 30%, rgba(255,255,255,.6) 0%, rgba(255,255,255,0) 70%),
-        linear-gradient(180deg,#e9f6ff 0%, #cde7ff 40%, #a8cbff 60%, #6a7fff 100%) !important;
-      box-shadow:
-        0 24px 40px rgba(120,160,255,.35),
-        0 0 40px rgba(120,160,255,.4);
+      background:linear-gradient(180deg,#e9f6ff 0%, #cde7ff 40%, #a8cbff 60%, #6a7fff 100%) !important;
+      box-shadow:0 24px 40px rgba(120,160,255,.35),0 0 40px rgba(120,160,255,.4);
       color:#1a224a;
       border:1px solid rgba(255,255,255,.4);
     }
-
     .accent-yellow{
-      background:
-        radial-gradient(circle at 50% 30%, rgba(255,255,255,.7) 0%, rgba(255,255,255,0) 70%),
-        linear-gradient(180deg,#fffbe5 0%, #fff2a8 40%, #ffd465 60%, #ffb92e 100%) !important;
-      box-shadow:
-        0 24px 40px rgba(255,200,60,.35),
-        0 0 40px rgba(255,200,60,.4);
+      background:linear-gradient(180deg,#fffbe5 0%, #fff2a8 40%, #ffd465 60%, #ffb92e 100%) !important;
+      box-shadow:0 24px 40px rgba(255,200,60,.35),0 0 40px rgba(255,200,60,.4);
       color:#4a3514;
       border:1px solid rgba(255,255,255,.4);
     }
-
     .folder-title{
       font-size:1.25rem;
       font-weight:700;
@@ -159,7 +227,6 @@
       margin-bottom:8px;
       color:var(--pine);
     }
-
     .folder-desc{
       font-size:.95rem;
       line-height:1.4;
@@ -167,29 +234,33 @@
       margin:0;
     }
 
-    footer{color:var(--sprig);text-align:center;padding:30px 0 46px}
+    footer{
+      color:var(--sprig);
+      text-align:center;
+      padding:30px 0 46px;
+      font-size:.9rem;
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
 
-    <!-- HERO -->
     <header>
-      <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
       <span class="badge">🌿 Light Spring • CSST102</span>
       <h1>Hi, I’m <strong>Jerick Mendez</strong></h1>
       <p class="sub">BS Computer Science • Section 3A • AY 2025–2026</p>
-      <div class="nav">
-        <a href="#repo">Repository</a>
-        <a href="#projects">Projects</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <a href="https://github.com/mendezjerick" target="_blank" rel="noopener">GitHub ↗</a>
-      </div>
+
+      <ul class="nav">
+        <li><a href="#repo">Repository</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="https://github.com/mendezjerick" target="_blank" rel="noopener">GitHub ↗</a></li>
+      </ul>
+
       <a class="cta" href="#repo">View CSST102 work</a>
     </header>
 
-    <!-- REPOSITORY -->
     <section id="repo" class="card">
       <h2>Course Repository</h2>
       <div class="grid">
@@ -200,40 +271,28 @@
       </div>
     </section>
 
-    <!-- PROJECTS -->
     <section id="projects" class="card">
       <h2>Projects</h2>
 
-      <!-- Filter chips (optional/visual) -->
       <div class="chips">
         <button class="chip active" data-filter="all">All</button>
         <button class="chip" data-filter="CSST102">CSST102</button>
       </div>
 
-      <!-- Spring-styled folder cards -->
       <div class="folder-grid">
-        <!-- Activity 1 -->
-        <a class="folder-card"
-           href="https://github.com/mendezjerick/CSST102-3A-AY25-26/tree/main/projects/Act1"
-           target="_blank" rel="noopener">
+        <a class="folder-card" href="https://github.com/mendezjerick/CSST102-3A-AY25-26/tree/main/projects/Act1" target="_blank" rel="noopener">
           <div class="folder-icon-wrap">🧠</div>
           <div class="folder-title">Activity 1</div>
           <p class="folder-desc">Simple project or files for Activity&nbsp;1</p>
         </a>
 
-        <!-- Activity 2 -->
-        <a class="folder-card"
-           href="https://github.com/mendezjerick/CSST102-3A-AY25-26/tree/main/projects/Act2"
-           target="_blank" rel="noopener">
+        <a class="folder-card" href="https://github.com/mendezjerick/CSST102-3A-AY25-26/tree/main/projects/Act2" target="_blank" rel="noopener">
           <div class="folder-icon-wrap accent-blue">💻</div>
           <div class="folder-title">Activity 2</div>
           <p class="folder-desc">Files and exercises for Activity&nbsp;2</p>
         </a>
 
-        <!-- Activity 3 -->
-        <a class="folder-card"
-           href="https://github.com/mendezjerick/CSST102-3A-AY25-26/tree/main/projects/MP2"
-           target="_blank" rel="noopener">
+        <a class="folder-card" href="https://github.com/mendezjerick/CSST102-3A-AY25-26/tree/main/projects/MP2" target="_blank" rel="noopener">
           <div class="folder-icon-wrap accent-yellow">📁</div>
           <div class="folder-title">Activity 3</div>
           <p class="folder-desc">Project files and related code</p>
@@ -242,21 +301,20 @@
 
       <p class="muted" style="margin-top:16px">
         Folder link:
-        <a href="https://github.com/mendezjerick/CSST102-3A-AY25-26/tree/main/projects"
-           target="_blank" rel="noopener">
+        <a href="https://github.com/mendezjerick/CSST102-3A-AY25-26/tree/main/projects" target="_blank" rel="noopener">
           open <strong>projects/</strong>
         </a>
       </p>
     </section>
 
-    <!-- ABOUT -->
     <section id="about" class="card">
       <h2>About Me</h2>
-      <p>I’m a BSCS student who enjoys building small, clean projects and learning core CS skills.
-      Current focus: data structures, Java/Python, and front-end basics (HTML/CSS/JS).</p>
+      <p class="muted">
+        I’m a BSCS student who enjoys building small, clean projects and learning core CS skills.
+        Current focus: data structures, Java/Python, and front-end basics (HTML/CSS/JS).
+      </p>
     </section>
 
-    <!-- CONTACT -->
     <section id="contact" class="card">
       <h2>Contact</h2>
       <p class="muted">
